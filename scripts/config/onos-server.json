@@ -1,0 +1,8 @@
+{
+    "node": {
+        "ip": "172.17.0.3",
+        "id": "onos-server",
+        "port": 9876
+    },
+    "name": "onos"
+}

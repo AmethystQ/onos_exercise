@@ -1,0 +1,17 @@
+#!/bin/bash
+# ----------------------------------------
+# Starts the specified mininet topology.
+# ----------------------------------------
+
+topo=${1:-default}
+
+# Extract the IP addresses of the ONOS nodes
+OC=$(docker container inspect onos-server | grep \"IPAddress | cut -d: -f2 | sort -u | tr -d '", ')
+ONOS_INSTANCE="$OC"
+
+onos $OC wipe-out please
+onos-netcfg $OC $topo.json
+
+[ -n "$1" ] && shift
+sudo mn -c
+sudo python $topo.py $ONOS_INSTANCE
